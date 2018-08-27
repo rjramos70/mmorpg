@@ -34,8 +34,8 @@ var connMongoDB = function(){
 		'got',		// database name.
 		new mongo.Server(
 			'localhost',	// database address.
-			27017,			// port that the database is running.
-			{}				// object with server configuration option.
+			27017,		// port that the database is running.
+			{}		// object with server configuration option.
 		),
 		{}	// additional configuration object for our DB object.	
 	);
