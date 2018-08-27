@@ -2,7 +2,7 @@
 
 MMORPG Game of Throne
 
-# Project Title
+## Project Title
 
 MMORPG web base project based in the Game of Throne
 
