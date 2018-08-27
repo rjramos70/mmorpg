@@ -31,14 +31,14 @@ After that configure the DB connection on the dbConnection.js , located in 'proj
 ```
 var connMongoDB = function(){
 	var db = new mongo.Db(
-			'got',		// database name.
-			new mongo.Server(
-				'localhost',	// database address.
-				27017,			// port that the database is running.
-				{}				// object with server configuration option.
-			),
-			{}	// additional configuration object for our DB object.	
-		);
+		'got',		// database name.
+		new mongo.Server(
+			'localhost',	// database address.
+			27017,			// port that the database is running.
+			{}				// object with server configuration option.
+		),
+		{}	// additional configuration object for our DB object.	
+	);
 
 	return db;
 }
