@@ -22,6 +22,8 @@
 				});
 
 				$('#btn_suditos').click(function(){	// cria a função de click no componente de id = btn_suditos.
+					$('#msg').hide();
+
 					$.ajax({			// chama a função ajax
 						url: '/suditos',	// a url 
 						method: 'get',		// o método
@@ -32,15 +34,44 @@
 				});
 
 				$('#btn_pergaminho').click(function(){
+					$('#msg').hide();
+					
 					$.ajax({
 						url: '/pergaminhos',
 						method: 'get',
 						success: function(data){
 							$('#acoes').html(data);
+
+							clearTimeout(timerId);
+							cronometro();
 						}
 					});
 				});
+				
+
 			});
+
+			var timerId = null;
+
+			function cronometro(){
+				// quando usamos ponto o JQuery entende é uma busca por class e não por id.
+				$('.tempo_restante').each(function(){
+					var segundos = $(this).html();
+					var segundos_atuais = parseInt(segundos) - 1;
+
+					// Verifica se o decremento chegou a zero
+					if(segundos_atuais < 0){
+						// redireciona para uma nova rota passando parametro pela URL
+						window.location.href = "/jogo?msg=C";
+					}else{
+						$(this).html(segundos_atuais);
+					}
+
+					
+				});
+
+				timerId = setTimeout('cronometro()', 1000);
+			}
 		</script>
 
 	</head>
@@ -56,7 +87,32 @@
 		</nav>
 
 	    <div class="container">
-	    	
+
+	    	<% if(msg == 'A'){ %>
+	    		<div class="alert alert-danger" id="msg">
+	    			<Strong>Opração inválida, verifique se todos os campos foram informados.</Strong>
+	    		</div>
+	    	<% } %>
+
+	    	<% if(msg == 'B'){ %>
+	    		<div class="alert alert-info" id="msg">
+	    			<Strong>Ação realizada com sucesso.</Strong>
+	    		</div>
+	    	<% } %>
+
+	    	<% if(msg == 'C'){ %>
+	    		<div class="alert alert-info" id="msg">
+	    			<Strong>Senhor, a atividade ordenada foi finalizada!</Strong>
+	    		</div>
+	    	<% } %>
+
+
+	    	<% if(msg == 'D'){ %>
+	    		<div class="alert alert-info" id="msg">
+	    			<Strong>Senhor, sua ordem foi revogada!</Strong>
+	    		</div>
+	    	<% } %>
+
 			<div class="row">
 	    		<div class="col-sm-3 casa">
 					<img src="images/casa_<%=img_casa%>.jpg" />
